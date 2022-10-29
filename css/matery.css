@@ -418,10 +418,10 @@ header .side-nav .social-link {
 .scroll-down {
     background: #333;
     margin: 100px auto;
-    -webkit-animation: scroll-down 1.5s infinite;
+    /* -webkit-animation: scroll-down 1.5s infinite; */
     -moz-animation: scroll-down 1.5s infinite;
     -o-animation: scroll-down 1.5s infinite;
-    animation: scroll-down 1.5s infinite;
+    /* animation: scroll-down 1.5s infinite; */
 }
 
 @-moz-keyframes scroll-down {
