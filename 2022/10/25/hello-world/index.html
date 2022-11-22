@@ -1008,11 +1008,39 @@ $(function () {
     
 
     <!-- 鼠标点击烟花特效 -->
-    {% if theme.fireworks %}
+     
         <canvas class="fireworks" style="position: fixed;left: 0;top: 0;z-index: 1; pointer-events: none;" ></canvas> 
         <script type="text/javascript" src="//cdn.bootcss.com/animejs/2.2.0/anime.min.js"></script> 
         <script type="text/javascript" src="/js/src/fireworks.js"></script>
-    {% endif %}
+    
+
+    <!-- 天气插件 -->
+    <div id="he-plugin-simple"></div>
+    <script>
+    WIDGET = {
+      "CONFIG": {
+        "modules": "12034",
+        "background": "1",
+        "tmpColor": "FFFFFF",
+        "tmpSize": "16",
+        "cityColor": "FFFFFF",
+        "citySize": "16",
+        "aqiColor": "FFFFFF",
+        "aqiSize": "16",
+        "weatherIconSize": "24",
+        "alertIconSize": "18",
+        "padding": "10px 10px 10px 10px",
+        "shadow": "0",
+        "language": "auto",
+        "borderRadius": "5",
+        "fixed": "false",
+        "vertical": "top",
+        "horizontal": "left",
+        "key": "85b14528b700403186a6a574cbab6526"
+      }
+    }
+    </script>
+    <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
 
     <script type="text/javascript">
         window.onload = function(){
