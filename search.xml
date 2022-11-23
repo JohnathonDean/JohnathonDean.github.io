@@ -182,6 +182,8 @@ def test():
 <p><img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="百度图标" title="百度图标"></p>
 <hr>
 <p><img src="/images/image111.png" alt="本地头像"></p>
+<hr>
+<p><img src="/images/loading1.gif" alt="加载动图"></p>
 ]]></content>
       <categories>
         <category>hexo</category>
