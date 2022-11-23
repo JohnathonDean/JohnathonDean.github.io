@@ -6,7 +6,7 @@
   <link href="https://johnathondean.github.io/atom.xml" rel="self"/>
   
   <link href="https://johnathondean.github.io/"/>
-  <updated>2022-10-26T01:52:33.956Z</updated>
+  <updated>2022-11-23T05:55:26.567Z</updated>
   <id>https://johnathondean.github.io/</id>
   
   <author>
@@ -17,22 +17,26 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>test</title>
-    <link href="https://johnathondean.github.io/2022/10/25/test/"/>
-    <id>https://johnathondean.github.io/2022/10/25/test/</id>
-    <published>2022-10-25T17:51:22.000Z</published>
-    <updated>2022-10-26T01:52:33.956Z</updated>
+    <title>Hexo post markdown test</title>
+    <link href="https://johnathondean.github.io/2022/11/22/Hexo-post-markdown-test/"/>
+    <id>https://johnathondean.github.io/2022/11/22/Hexo-post-markdown-test/</id>
+    <published>2022-11-22T11:08:00.000Z</published>
+    <updated>2022-11-23T05:55:26.567Z</updated>
     
-    <content type="html"><![CDATA[<h1 id="title1"><a href="#title1" class="headerlink" title="title1"></a>title1</h1><h2 id="title2"><a href="#title2" class="headerlink" title="title2"></a>title2</h2><h3 id="title3"><a href="#title3" class="headerlink" title="title3"></a>title3</h3>]]></content>
+    <content type="html"><![CDATA[<h1 id="hexo-markdown-test"><a href="#hexo-markdown-test" class="headerlink" title="hexo markdown test"></a>hexo markdown test</h1><h2 id="1-字体"><a href="#1-字体" class="headerlink" title="1.字体"></a>1.字体</h2><p><em>斜体文字</em><br><em>斜体文字</em></p><p><strong>粗体文字</strong><br><strong>粗体文字</strong></p><p><em><strong>粗斜体文字</strong></em><br><em><strong>粗斜体文字</strong></em></p><p>baidu.com<br>sina.com<br><del>删除线tencent.com</del><br><del>删除线</del></p><p><u>带下划线文本</u></p><p>29^th^ =&gt; <code>29&lt;sup&gt;th&lt;/sup&gt;</code><br>H<del>2</del>0 =&gt; <code>H&lt;sub&gt;2&lt;/sub&gt;O</code><br>==marked== =&gt; <code>&lt;mark&gt;inserted&lt;/mark&gt;</code><br>++inserted++ =&gt; <code>&lt;ins&gt;inserted&lt;/ins&gt;</code>  </p><h2 id="2-链接"><a href="#2-链接" class="headerlink" title="2.链接"></a>2.链接</h2><p>带链接的文字<a href="https://news.sina.com.cn/">新浪新闻</a></p><p>直接链接<a href="https://news.sina.com.cn/">https://news.sina.com.cn/</a></p><p>链接也可以用变量来代替，文档末尾附带变量地址：<br>这个链接用1作为网址变量<a href="http://www.baidu.com/">baidu</a><br>这个链接用markdown作为网址变量<a href="http://www.markdown.com/">Markdown</a><br>然后文档的结尾为变量赋值(网址)</p><h2 id="3-代码块"><a href="#3-代码块" class="headerlink" title="3.代码块"></a>3.代码块</h2><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo generate<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre><pre class="line-numbers language-none"><code class="language-none">print('Markdown')def test():    print('Markdown test!')<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><pre class="line-numbers language-javascript" data-language="javascript"><code class="language-javascript"><span class="token function">$</span><span class="token punctuation">(</span>document<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">read</span><span class="token punctuation">(</span><span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>    <span class="token function">alert</span><span class="token punctuation">(</span><span class="token string">'Markdown'</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre><p>文中使用<code>print()</code>函数</p><h2 id="4-分割线"><a href="#4-分割线" class="headerlink" title="4.分割线"></a>4.分割线</h2><hr><hr><hr><hr><hr><h2 id="5-列表"><a href="#5-列表" class="headerlink" title="5.列表"></a>5.列表</h2><h3 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h3><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul><ul><li>第一项</li><li>第二项</li><li>第三项</li></ul><ol><li>第一项</li><li>第二项</li><li>第三项</li></ol><h3 id="嵌套使用"><a href="#嵌套使用" class="headerlink" title="嵌套使用"></a>嵌套使用</h3><ol><li>第一项：<ul><li>第一项嵌套的第一个元素</li><li>第一项嵌套的第二个元素</li></ul></li><li>第二项：<ul><li>第二项嵌套的第一个元素</li><li>第二项嵌套的第二个元素</li></ul></li></ol><h2 id="6-区块"><a href="#6-区块" class="headerlink" title="6.区块"></a>6.区块</h2><h2 id="7-表格"><a href="#7-表格" class="headerlink" title="7.表格"></a>7.表格</h2><h2 id="8-checkbox"><a href="#8-checkbox" class="headerlink" title="8.checkbox"></a>8.checkbox</h2><ul><li><input checked="" disabled="" type="checkbox"> item 1<ul><li><input checked="" disabled="" type="checkbox"> item 1-1</li><li><input disabled="" type="checkbox"> item 1-2</li><li><input disabled="" type="checkbox"> item 1-3</li><li><input disabled="" type="checkbox"> item 1-4</li></ul></li><li><input disabled="" type="checkbox"> item 2<ul><li><input disabled="" type="checkbox"> item 2-1</li><li><input disabled="" type="checkbox"> item 2-2</li><li><input disabled="" type="checkbox"> item 2-3</li><li><input disabled="" type="checkbox"> item 2-4</li></ul></li></ul><h2 id="9-emoji"><a href="#9-emoji" class="headerlink" title="9.emoji"></a>9.emoji</h2><p><span class="github-emoji"><span>😄</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😏</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/1f60f.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>☀</span><img src="https://github.githubassets.com/images/icons/emoji/unicode/2600.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p><h2 id="3-图片"><a href="#3-图片" class="headerlink" title="3.图片"></a>3.图片</h2><p><img src="https://pic4.zhimg.com/80/v2-a47051e92cf74930bedd7469978e6c08_hd.png" alt="知乎图标"></p><hr><p><img src="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="百度图标" title="百度图标"></p><hr><p><img src="/images/image111.png" alt="本地头像"></p>]]></content>
     
     
       
       
-    <summary type="html">&lt;h1 id=&quot;title1&quot;&gt;&lt;a href=&quot;#title1&quot; class=&quot;headerlink&quot; title=&quot;title1&quot;&gt;&lt;/a&gt;title1&lt;/h1&gt;&lt;h2 id=&quot;title2&quot;&gt;&lt;a href=&quot;#title2&quot; class=&quot;headerlink&quot; titl</summary>
+    <summary type="html">&lt;h1 id=&quot;hexo-markdown-test&quot;&gt;&lt;a href=&quot;#hexo-markdown-test&quot; class=&quot;headerlink&quot; title=&quot;hexo markdown test&quot;&gt;&lt;/a&gt;hexo markdown test&lt;/h1&gt;&lt;h2 id=&quot;1</summary>
       
     
     
     
+    <category term="hexo" scheme="https://johnathondean.github.io/categories/hexo/"/>
+    
+    
+    <category term="hexo" scheme="https://johnathondean.github.io/tags/hexo/"/>
     
   </entry>
   

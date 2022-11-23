@@ -2,6 +2,15 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://johnathondean.github.io/2022/11/22/Hexo-post-markdown-test/</loc>
+    
+    <lastmod>2022-11-23</lastmod>
+    
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
     <loc>https://johnathondean.github.io/404.html</loc>
     
     <lastmod>2022-10-28</lastmod>
@@ -65,15 +74,6 @@
   </url>
   
   <url>
-    <loc>https://johnathondean.github.io/2022/10/25/test/</loc>
-    
-    <lastmod>2022-10-26</lastmod>
-    
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  
-  <url>
     <loc>https://johnathondean.github.io/2022/10/25/hello-world/</loc>
     
     <lastmod>2022-10-25</lastmod>
@@ -85,12 +85,26 @@
 
   <url>
     <loc>https://johnathondean.github.io/</loc>
-    <lastmod>2022-11-22</lastmod>
+    <lastmod>2022-11-23</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
 
   
+  <url>
+    <loc>https://johnathondean.github.io/tags/hexo/</loc>
+    <lastmod>2022-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
 
+  
+  <url>
+    <loc>https://johnathondean.github.io/categories/hexo/</loc>
+    <lastmod>2022-11-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
   
 </urlset>
