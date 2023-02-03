@@ -396,7 +396,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2022-11-23
+                    2022-11-28
                 </div>
                 
 
@@ -448,6 +448,19 @@ def test():
 
 
 <p>文中使用<code>print()</code>函数</p>
+<p>codeblock使用参数<code>[title] [lang:language] [url] [link text] [additional options]</code></p>
+<pre class="line-numbers language-none"><code class="language-none">code snippet<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-objectivec" data-language="objectivec"><code class="language-objectivec"><span class="token punctuation">[</span>rectangle setX<span class="token punctuation">:</span> <span class="token number">10</span> y<span class="token punctuation">:</span> <span class="token number">10</span> width<span class="token punctuation">:</span> <span class="token number">20</span> height<span class="token punctuation">:</span> <span class="token number">20</span><span class="token punctuation">]</span><span class="token punctuation">;</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><div class="caption"><span>Array.map</span></div><code class="language-none">array.map(callback[, thisArg])<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<pre class="line-numbers language-none"><div class="caption"><span>_.compact</span><a target="_blank" rel="noopener" href="http://underscorejs.org/#compact">Underscore.js</a></div><code class="language-none">_.compact([0, 1, false, 2, '', 3]);
+=&gt; [1, 2, 3]<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+
 <h2 id="4-分割线"><a href="#4-分割线" class="headerlink" title="4.分割线"></a>4.分割线</h2><hr>
 <hr>
 <hr>
@@ -497,7 +510,61 @@ def test():
 </blockquote>
 </blockquote>
 </blockquote>
-<h2 id="7-表格"><a href="#7-表格" class="headerlink" title="7.表格"></a>7.表格</h2><table>
+<h2 id="7-tag-note"><a href="#7-tag-note" class="headerlink" title="7.tag note"></a>7.tag note</h2><div class="note "><h4 id="Header"><a href="#Header" class="headerlink" title="Header"></a>Header</h4><p>(without define class style)</p>
+</div>
+
+<div class="note primary"><h4 id="Primary-Header"><a href="#Primary-Header" class="headerlink" title="Primary Header"></a>Primary Header</h4><p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo!</a></p>
+</div>
+
+<div class="note info"><h4 id="Info-Header"><a href="#Info-Header" class="headerlink" title="Info Header"></a>Info Header</h4><p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo!</a></p>
+</div>
+
+<div class="note success"><h4 id="Success-Header"><a href="#Success-Header" class="headerlink" title="Success Header"></a>Success Header</h4><p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo!</a></p>
+</div>
+
+<div class="note warning"><h4 id="Warning-Header"><a href="#Warning-Header" class="headerlink" title="Warning Header"></a>Warning Header</h4><p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo!</a></p>
+</div>
+
+<div class="note danger"><h4 id="Danger-Header"><a href="#Danger-Header" class="headerlink" title="Danger Header"></a>Danger Header</h4><p><strong>Welcome</strong> to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo!</a></p>
+</div>
+
+<div class="note info no-icon"><h4 id="No-icon-note"><a href="#No-icon-note" class="headerlink" title="No icon note"></a>No icon note</h4><p>Note <strong>without</strong> icon: <code>note info no-icon</code></p>
+</div>
+
+<details class="note info no-icon"><summary><p>This is a summary</p>
+</summary>
+  <h4 id="Details-and-summary-No-icon-Note-with-summary-note-info-no-icon-This-is-a-summary"><a href="#Details-and-summary-No-icon-Note-with-summary-note-info-no-icon-This-is-a-summary" class="headerlink" title="Details and summary (No icon) Note with summary: note info no-icon This is a summary"></a>Details and summary (No icon) Note with summary: <code>note info no-icon This is a summary</code></h4>
+  </details>
+
+<div class="note success"><h4 id="Codeblock-in-note-code-block-in-note-tag-code-block-in-note-tag-code-block-in-note-tag"><a href="#Codeblock-in-note-code-block-in-note-tag-code-block-in-note-tag-code-block-in-note-tag" class="headerlink" title="Codeblock in note code block in note tag code block in note tag code block in note tag"></a>Codeblock in note <code>code block in note tag code block in note tag code block in note tag</code></h4></div>
+
+<h4 id="Table-in-Note"><a href="#Table-in-Note" class="headerlink" title="Table in Note"></a>Table in Note</h4><div class="note default"><table>
+<thead>
+<tr>
+<th>1</th>
+<th>2</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>3</td>
+<td>4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+</tr>
+<tr>
+<td>7</td>
+<td>8</td>
+</tr>
+</tbody></table>
+</div>
+
+
+
+
+
+<h2 id="8-表格"><a href="#8-表格" class="headerlink" title="8.表格"></a>8.表格</h2><table>
 <thead>
 <tr>
 <th>表头1</th>
@@ -558,7 +625,7 @@ def test():
 <td>92</td>
 </tr>
 </tbody></table>
-<h2 id="8-checkbox"><a href="#8-checkbox" class="headerlink" title="8.checkbox"></a>8.checkbox</h2><ul>
+<h2 id="9-checkbox"><a href="#9-checkbox" class="headerlink" title="9.checkbox"></a>9.checkbox</h2><ul>
 <li><input checked="" disabled="" type="checkbox"> item 1<ul>
 <li><input checked="" disabled="" type="checkbox"> item 1-1</li>
 <li><input disabled="" type="checkbox"> item 1-2</li>
@@ -574,8 +641,26 @@ def test():
 </ul>
 </li>
 </ul>
-<h2 id="9-emoji"><a href="#9-emoji" class="headerlink" title="9.emoji"></a>9.emoji</h2><p><span class="github-emoji"><span>😄</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😏</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/1f60f.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>☀</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/2600.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
-<h2 id="10-HTML元素"><a href="#10-HTML元素" class="headerlink" title="10.HTML元素"></a>10.HTML元素</h2><div class="footer">
+<h2 id="10-emoji"><a href="#10-emoji" class="headerlink" title="10.emoji"></a>10.emoji</h2><p><span class="github-emoji"><span>😄</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>😏</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/1f60f.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span><span class="github-emoji"><span>☀</span><img src="./load1.jpeg" data-original="https://github.githubassets.com/images/icons/emoji/unicode/2600.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<h2 id="11-按钮"><a href="#11-按钮" class="headerlink" title="11.按钮"></a>11.按钮</h2><p>Button with text &amp; title</p>
+<a class="theme-btn" href="#">Text</a>
+<a class="theme-btn" href="#">Text</a>
+<a class="theme-btn" href="#" title="Title">Text &amp; Title</a>
+
+<p>Button with icon</p>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-5x"></i></a>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-4x"></i></a>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-3x"></i></a>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-2x"></i></a>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-lg"></i></a>
+<a class="theme-btn" href="#"><i class="fa fa-home"></i></a>
+
+<p>Button with text &amp; icon</p>
+<a class="theme-btn" href="#"><i class="fa fa-home"></i>Text &amp; Icon (buggy)</a>
+<a class="theme-btn" href="#"><i class="fa fa-home fa-fw"></i>Text &amp; Icon (fixed width)</a>
+
+<p>Button inside text<br>Lorem <a class="theme-btn" href="#"><i class="fa fa-home fa-fw fa-lg"></i>Lorem</a> ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<h2 id="12-HTML元素"><a href="#12-HTML元素" class="headerlink" title="12.HTML元素"></a>12.HTML元素</h2><div class="footer">
    © 2004 Foo Corporation
 </div>
 
@@ -595,15 +680,34 @@ def test():
 </tbody></table>
 
 
-
-
-<h2 id="11-图片"><a href="#11-图片" class="headerlink" title="11.图片"></a>11.图片</h2><p><img src="./load1.jpeg" data-original="https://pic4.zhimg.com/80/v2-a47051e92cf74930bedd7469978e6c08_hd.png" alt="知乎图标"></p>
+<h2 id="13-公式"><a href="#13-公式" class="headerlink" title="13.公式"></a>13.公式</h2><p>$$<br>E=mc^2<br>$$</p>
+<p>$ \Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt,. $</p>
+<p>$$\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt,.$$</p>
+<p>$$<br>\left{<br>\begin{array}{c}<br>    a_1x+b_1y+c_1z=d_1 \<br>    a_2x+b_2y+c_2z=d_2 \<br>    a_3x+b_3y+c_3z=d_3<br>\end{array}<br>\right.<br>$$</p>
+<h2 id="14-图片"><a href="#14-图片" class="headerlink" title="14.图片"></a>14.图片</h2><p><img src="./load1.jpeg" data-original="https://pic4.zhimg.com/80/v2-a47051e92cf74930bedd7469978e6c08_hd.png" alt="知乎图标"></p>
 <hr>
-<p><img src="./load1.jpeg" data-original="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="百度图标" title="百度图标"></p>
+<p><img src="./load1.jpeg" data-original="https://www.baidu.com/img/PCfb_5bf082d29588c07f842ccde3f97243ea.png" alt="百度图标" title="百度透明图标"></p>
 <hr>
 <p><img src="./load1.jpeg" data-original="/images/image111.png" alt="本地头像"></p>
 <hr>
 <p><img src="./load1.jpeg" data-original="/images/loading1.gif" alt="加载动图"></p>
+<h2 id="插入视频"><a href="#插入视频" class="headerlink" title="插入视频"></a>插入视频</h2><h2 id="插入PDF"><a href="#插入PDF" class="headerlink" title="插入PDF"></a>插入PDF</h2>
+
+	<div class="row">
+    <embed src="/pdf/test1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
+
+
+
+
+
+	<div class="row">
+    <embed src="https://arxiv.org/pdf/2103.00784v1.pdf" width="100%" height="550" type="application/pdf">
+	</div>
+
+
 
                 
             </div>
@@ -928,7 +1032,7 @@ def test():
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2022</span>
+                <span id="year">2020-2023</span>
             
             <a href="/about" target="_blank">Johnathon Dean</a>
             <br>
@@ -1213,6 +1317,7 @@ $(function () {
     
 
     <!-- 天气插件 -->
+
     <div id="he-plugin-simple"></div>
     <script>
     WIDGET = {
@@ -1231,14 +1336,17 @@ $(function () {
         "shadow": "0",
         "language": "auto",
         "borderRadius": "5",
-        "fixed": "false",
+        "fixed": "true",
         "vertical": "top",
-        "horizontal": "left",
+        "horizontal": "right",
         "key": "85b14528b700403186a6a574cbab6526"
       }
     }
     </script>
     <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+
+    <!-- live2d模型插件 -->
+    <script src="https://cdn.jsdelivr.net/gh/17lai/live2d-widget@latest/autoload.js"></script>
 
     <script type="text/javascript">
         window.onload = function(){
@@ -1246,8 +1354,8 @@ $(function () {
             document.onkeydown = function (){
                 var e = window.event || arguments[0];
                 //F12
-                if(e.keyCode == 123){
-                    return false;
+                //if(e.keyCode == 123){
+                //    return false;
                 //Ctrl+Shift+I
                 }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
                     return false;
@@ -1315,7 +1423,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"log":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-z16@1.0.5/assets/z16.model.json"},"display":{"position":"right","width":150,"height":190,"hOffset":50,"vOffset":-5},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;

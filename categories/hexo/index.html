@@ -472,7 +472,7 @@
         <div class="col s12 m8 l8 copy-right">
             Copyright&nbsp;&copy;
             
-                <span id="year">2020-2022</span>
+                <span id="year">2020-2023</span>
             
             <a href="/about" target="_blank">Johnathon Dean</a>
             <br>
@@ -757,6 +757,7 @@ $(function () {
     
 
     <!-- 天气插件 -->
+
     <div id="he-plugin-simple"></div>
     <script>
     WIDGET = {
@@ -775,14 +776,17 @@ $(function () {
         "shadow": "0",
         "language": "auto",
         "borderRadius": "5",
-        "fixed": "false",
+        "fixed": "true",
         "vertical": "top",
-        "horizontal": "left",
+        "horizontal": "right",
         "key": "85b14528b700403186a6a574cbab6526"
       }
     }
     </script>
     <script src="https://widget.qweather.net/simple/static/js/he-simple-common.js?v=2.0"></script>
+
+    <!-- live2d模型插件 -->
+    <script src="https://cdn.jsdelivr.net/gh/17lai/live2d-widget@latest/autoload.js"></script>
 
     <script type="text/javascript">
         window.onload = function(){
@@ -790,8 +794,8 @@ $(function () {
             document.onkeydown = function (){
                 var e = window.event || arguments[0];
                 //F12
-                if(e.keyCode == 123){
-                    return false;
+                //if(e.keyCode == 123){
+                //    return false;
                 //Ctrl+Shift+I
                 }else if((e.ctrlKey) && (e.shiftKey) && (e.keyCode == 73)){
                     return false;
@@ -859,7 +863,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"log":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-z16@1.0.5/assets/z16.model.json"},"display":{"position":"right","width":150,"height":190,"hOffset":50,"vOffset":-5},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script>
+
         <style>
             [bg-lazy] {
                 background-image: none !important;
