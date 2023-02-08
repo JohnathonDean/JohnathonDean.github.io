@@ -401,7 +401,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-07
+                    2023-02-08
                 </div>
                 
 
@@ -431,10 +431,82 @@
                 <h1 id="C-Signal使用"><a href="#C-Signal使用" class="headerlink" title="C++ Signal使用"></a>C++ Signal使用</h1><blockquote>
 <p>简介<br>信号机制是进程之间相互传递消息的一种方法，信号全称为软中断信号，也有人称软中断。从它的命名可以看出，它的实质和使用很像中断，所有，信号可以说是进程控制的一部分。信号signal处理是Linux程序的一个特色，用信号处理来模拟操作系统的中断功能。C++使用处理信号的标准库 <code>#include &lt;csignal&gt;</code> 或 <code>#include &lt;signal.h&gt;</code></p>
 </blockquote>
-<h2 id="1-什么是信号"><a href="#1-什么是信号" class="headerlink" title="1.什么是信号"></a>1.什么是信号</h2><span id="more"></span>
-<p>图片</p>
-<p>正文</p>
-<p>参考</p>
+<h2 id="1-什么是信号"><a href="#1-什么是信号" class="headerlink" title="1.什么是信号"></a>1.什么是信号</h2><ul>
+<li><p><code>#include &lt;csignal&gt;</code> 或 <code>#include &lt;signal.h&gt;</code>是处理信号的C标准库，该库主要包含了<code>signal()</code>与<code>raise()</code>两个功能函数。  </p>
+<ol>
+<li>函数signal用于捕获信号，可指定信号处理的方式。  </li>
+<li>函数raise产生一个信号，并向当前正在执行的程序发送该信号。  </li>
+</ol>
+</li>
+<li><p>信号<code>signal</code>可以理解为由操作系统传给程序（进程）的事件，只是用来通知程序发生了什么事件，并不会传递给该进程任何数据。</p>
+</li>
+<li><p>信号是一种中断，因为它可以改变程序的流程。当信号传递给进程时，进程将停下其正在执行的操作，并去处理或忽略该信号异步事件。</p>
+</li>
+</ul>
+<div class="note "><p><em>异步事件</em> - 查看信号的方式是一种处理异步事件的机制。</p>
+<ul>
+<li>当程序通过signal函数捕获信号后，若signal函数第二参数为函数指针，则调用signal函数的程序会阻塞（暂停在signal函数这句），直至异步线程（进入函数指针）return。程序将从暂停点恢复执行。</li>
+<li>此外，进程之间可以互相通过系统调用kill发送软中断信号。<br>(without define class style)</li>
+</ul>
+</div>
+
+<ul>
+<li>C++头文件<code>signum.h</code>和<code>signum-generic.h</code>中定义了以下信号<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">/* We define here all the signal names listed in POSIX (1003.1-2008);
+   as of 1003.1-2013, no additional signals have been added by POSIX.
+   We also define here signal names that historically exist in every
+   real-world POSIX variant (e.g. SIGWINCH).
+
+   Signals in the 1-15 range are defined with their historical numbers.
+   For other signals, we use the BSD numbers.
+   There are two unallocated signal numbers in the 1-31 range: 7 and 29.
+   Signal number 0 is reserved for use as kill(pid, 0), to test whether
+   a process exists without sending it a signal.  */
+
+/* ISO C99 signals.  */
+#define	SIGINT		2	/* Interactive attention signal.  */
+#define	SIGILL		4	/* Illegal instruction.  */
+#define	SIGABRT		6	/* Abnormal termination.  */
+#define	SIGFPE		8	/* Erroneous arithmetic operation.  */
+#define	SIGSEGV		11	/* Invalid access to storage.  */
+#define	SIGTERM		15	/* Termination request.  */
+
+/* Historical signals specified by POSIX. */
+#define	SIGHUP		1	/* Hangup.  */
+#define	SIGQUIT		3	/* Quit.  */
+#define	SIGTRAP		5	/* Trace/breakpoint trap.  */
+#define	SIGKILL		9	/* Killed.  */
+#define SIGBUS		10	/* Bus error.  */
+#define	SIGSYS		12	/* Bad system call.  */
+#define	SIGPIPE		13	/* Broken pipe.  */
+#define	SIGALRM		14	/* Alarm clock.  */
+
+/* New(er) POSIX signals (1003.1-2008, 1003.1-2013).  */
+#define	SIGURG		16	/* Urgent data is available at a socket.  */
+#define	SIGSTOP		17	/* Stop, unblockable.  */
+#define	SIGTSTP		18	/* Keyboard stop.  */
+#define	SIGCONT		19	/* Continue.  */
+#define	SIGCHLD		20	/* Child terminated or stopped.  */
+#define	SIGTTIN		21	/* Background read from control terminal.  */
+#define	SIGTTOU		22	/* Background write to control terminal.  */
+#define	SIGPOLL		23	/* Pollable event occurred (System V).  */
+#define	SIGXCPU		24	/* CPU time limit exceeded.  */
+#define	SIGXFSZ		25	/* File size limit exceeded.  */
+#define	SIGVTALRM	26	/* Virtual timer expired.  */
+#define	SIGPROF		27	/* Profiling timer expired.  */
+#define	SIGUSR1		30	/* User-defined signal 1.  */
+#define	SIGUSR2		31	/* User-defined signal 2.  */
+
+/* Nonstandard signals found in all modern POSIX systems
+   (including both BSD and Linux).  */
+#define	SIGWINCH	28	/* Window size change (4.3 BSD, Sun).  */
+
+/* Archaic names for compatibility.  */
+#define	SIGIO		SIGPOLL	/* I/O now possible (4.2 BSD).  */
+#define	SIGIOT		SIGABRT	/* IOT instruction, abort() on a PDP-11.  */
+#define	SIGCLD		SIGCHLD	/* Old System V name */<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
+</ul>
+<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2.函数signal"></a>2.函数signal</h2><h2 id="3-函数raise"><a href="#3-函数raise" class="headerlink" title="3.函数raise"></a>3.函数raise</h2><hr>
+<p>参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013271656/article/details/114537411">https://blog.csdn.net/u013271656/article/details/114537411</a></p>
 
                 
             </div>
@@ -1173,7 +1245,7 @@ $(function () {
     <script src="/libs/instantpage/instantpage.js" type="module"></script>
     
 
-
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"log":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-z16@1.0.5/assets/z16.model.json"},"display":{"position":"right","width":195,"height":247,"hOffset":80,"vOffset":-3},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script>
         <style>
             [bg-lazy] {
                 background-image: none !important;
@@ -1186,6 +1258,6 @@ $(function () {
                 preloadRatio: 3,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"log":false,"model":{"jsonPath":"https://cdn.jsdelivr.net/npm/live2d-widget-model-z16@1.0.5/assets/z16.model.json"},"display":{"position":"right","width":195,"height":247,"hOffset":80,"vOffset":-3},"mobile":{"show":false,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8}});</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body>
 
 </html>
