@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hexo post markdown test</title>
-    <url>/2022/11/22/Hexo-post-markdown-test/</url>
-    <content><![CDATA[<h1 id="hexo-markdown-test"><a href="#hexo-markdown-test" class="headerlink" title="hexo markdown test"></a>hexo markdown test</h1><h2 id="1-字体"><a href="#1-字体" class="headerlink" title="1.字体"></a>1.字体</h2><p><em>斜体文字</em><br><em>斜体文字</em></p>
+    <title>Hexo使用markdown语法的样例</title>
+    <url>/2023/02/06/hexo-markdown-test/</url>
+    <content><![CDATA[<h1 id="Hexo使用markdown语法的样例"><a href="#Hexo使用markdown语法的样例" class="headerlink" title="Hexo使用markdown语法的样例"></a>Hexo使用markdown语法的样例</h1><blockquote>
+<p>简介<br>在Hexo平台写博客使用markdown语法的一下样例</p>
+</blockquote>
+<h2 id="1-字体"><a href="#1-字体" class="headerlink" title="1.字体"></a>1.字体</h2><p><em>斜体文字</em><br><em>斜体文字</em></p>
 <p><strong>粗体文字</strong><br><strong>粗体文字</strong></p>
 <p><em><strong>粗斜体文字</strong></em><br><em><strong>粗斜体文字</strong></em></p>
 <p>baidu.com<br>sina.com<br><del>删除线tencent.com</del><br><del>删除线</del></p>
@@ -294,12 +297,34 @@ def test():
       </categories>
       <tags>
         <tag>hexo</tag>
+        <tag>markdown</tag>
       </tags>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/2022/10/25/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+    <title>C++的Signal使用</title>
+    <url>/2023/02/07/linux-c-signal/</url>
+    <content><![CDATA[<h1 id="C-Signal使用"><a href="#C-Signal使用" class="headerlink" title="C++ Signal使用"></a>C++ Signal使用</h1><blockquote>
+<p>简介<br>信号机制是进程之间相互传递消息的一种方法，信号全称为软中断信号，也有人称软中断。从它的命名可以看出，它的实质和使用很像中断，所有，信号可以说是进程控制的一部分。信号signal处理是Linux程序的一个特色，用信号处理来模拟操作系统的中断功能。C++使用处理信号的标准库 <code>#include &lt;csignal&gt;</code> 或 <code>#include &lt;signal.h&gt;</code></p>
+</blockquote>
+<h2 id="1-什么是信号"><a href="#1-什么是信号" class="headerlink" title="1.什么是信号"></a>1.什么是信号</h2><span id="more"></span>
+<p>图片</p>
+<p>正文</p>
+<p>参考</p>
+]]></content>
+      <categories>
+        <category>C++</category>
+      </categories>
+      <tags>
+        <tag>Linux</tag>
+        <tag>C++</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>hexo-startup</title>
+    <url>/2023/02/07/hexo-startup/</url>
+    <content><![CDATA[<h1 id="Hexo入门"><a href="#Hexo入门" class="headerlink" title="Hexo入门"></a>Hexo入门</h1><blockquote>
+<p>简介<br>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
+</blockquote>
 <h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
 <p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
@@ -313,5 +338,12 @@ def test():
 
 <p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
 ]]></content>
+      <categories>
+        <category>hexo</category>
+      </categories>
+      <tags>
+        <tag>hexo</tag>
+        <tag>web</tag>
+      </tags>
   </entry>
 </search>

@@ -1,4 +1,6 @@
-https://johnathondean.github.io/2022/11/22/Hexo-post-markdown-test/
+https://johnathondean.github.io/2023/02/07/hexo-startup/
+https://johnathondean.github.io/2023/02/06/hexo-markdown-test/
+https://johnathondean.github.io/2023/02/07/linux-c-signal/
 https://johnathondean.github.io/404.html
 https://johnathondean.github.io/others/index.html
 https://johnathondean.github.io/about/index.html
@@ -6,7 +8,11 @@ https://johnathondean.github.io/friends/index.html
 https://johnathondean.github.io/contact/index.html
 https://johnathondean.github.io/tags/index.html
 https://johnathondean.github.io/categories/index.html
-https://johnathondean.github.io/2022/10/25/hello-world/
 https://johnathondean.github.io/
 https://johnathondean.github.io/tags/hexo/
+https://johnathondean.github.io/tags/markdown/
+https://johnathondean.github.io/tags/Linux/
+https://johnathondean.github.io/tags/C/
+https://johnathondean.github.io/tags/web/
 https://johnathondean.github.io/categories/hexo/
+https://johnathondean.github.io/categories/C/
