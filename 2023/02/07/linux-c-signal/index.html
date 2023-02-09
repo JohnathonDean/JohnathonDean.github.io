@@ -401,7 +401,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
-                    2023-02-08
+                    2023-02-09
                 </div>
                 
 
@@ -505,8 +505,111 @@
 #define	SIGIOT		SIGABRT	/* IOT instruction, abort() on a PDP-11.  */
 #define	SIGCLD		SIGCHLD	/* Old System V name */<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre></li>
 </ul>
-<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2.函数signal"></a>2.函数signal</h2><h2 id="3-函数raise"><a href="#3-函数raise" class="headerlink" title="3.函数raise"></a>3.函数raise</h2><hr>
+<h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2.函数signal"></a>2.函数signal</h2><p>函数signal 用于捕获信号，可指定信号处理的方式，函数声明如下：</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">void (*signal(int sig, void (*func)(int)))(int);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<div class="note "><p>第一个参数 sig 指明了所要处理的信号类型，它可以取除了SIGKILL和SIGSTOP外的任何一种信号。<br>第二个参数描述了与信号关联的动作，下面将会对这三个参数进行讲解。<br>(without define class style)</p>
+</div>
+
+<p>当程序收到信号的进程对各种信号有不同的处理方法。处理方法可以分为三类：<br>    1. 默认处理：对信号进行该信号的系统默认处理，第二参数为 SIG_DFL。<br>    2. 忽略信号：忽略该信号，第二参数为 SIG_IGN。<br>    3. Function handler：指定处理函数，由该函数来处理，第二参数为 函数指针 。<br>若signal函数中第二参数（函数指针）中通过 raise发出与signal函数对应信号类型相同的信号。程序将在signal函数这成为死循环，自己发信号，自己捕获，进程暂停。</p>
+<h3 id="2-1默认处理-SIG-DFL"><a href="#2-1默认处理-SIG-DFL" class="headerlink" title="2.1默认处理-SIG_DFL"></a>2.1默认处理-SIG_DFL</h3><p>SIG_DFL 对信号进行该信号的系统默认处理。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;chrono&gt;
+#include &lt;iostream&gt;
+#include &lt;csignal&gt;
+#include &lt;thread&gt;
+
+using namespace std;
+int main() {
+    
+    signal(SIGINT, SIG_DFL);
+    while(1){
+        std::this_thread::sleep_for (std::chrono::seconds(1));
+        std::cout &lt;&lt; "hello world!" &lt;&lt; endl;
+    }
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>该程序包含一个死循环，循环内以一秒为间隔 打印语句。<br>SIGINT信号代表由InterruptKey产生，通常是CTRL +C 。执行上述代码时，按下CTRL + C 后程序退出。</p>
+<h3 id="2-2忽略信号-SIG-IGN"><a href="#2-2忽略信号-SIG-IGN" class="headerlink" title="2.2忽略信号-SIG_IGN"></a>2.2忽略信号-SIG_IGN</h3><p>SIG_IGN 表示忽略该信号。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;chrono&gt;
+#include &lt;iostream&gt;
+#include &lt;csignal&gt;
+#include &lt;thread&gt;
+
+using namespace std;
+int main() {
+    
+    signal(SIGINT, SIG_IGN);
+    while(1){
+        std::this_thread::sleep_for (std::chrono::seconds(1));
+        std::cout &lt;&lt; "hello world!" &lt;&lt; endl;
+    }
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>该程序包含一个死循环，循环内以一秒为间隔 打印语句。<br>SIGINT信号代表由InterruptKey产生，通常是CTRL +C 。执行上述代码时，按下CTRL + C 后程序没有反应。<br>如果我们想结束该程序可以按下CTRL +\，CTRL +\ 组合键会产生SIGQUIT信号，此信号并没有被忽略。</p>
+<h3 id="2-3自定义函数"><a href="#2-3自定义函数" class="headerlink" title="2.3自定义函数"></a>2.3自定义函数</h3><pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">void (*signal(int sig, void (*func)(int)))(int);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>第二参数为 函数指针 ：当signal函数捕获信号后，通过指定函数进行处理。<br>此函数必须在 signal() 被调用前申明。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;chrono&gt;
+#include &lt;iostream&gt;
+#include &lt;csignal&gt;
+#include &lt;thread&gt;
+
+using namespace std;
+
+using namespace std;
+void signalHandler( int signum ) {
+    std::cout &lt;&lt; "我来处理！" &lt;&lt; std::endl;
+    std::this_thread::sleep_for (std::chrono::seconds(5));
+}
+
+int main() {
+    
+    signal(SIGINT, signalHandler);			// 捕获 SIGINT
+    std::this_thread::sleep_for (std::chrono::seconds(2));
+        
+    std::cout &lt;&lt; "程序结束." &lt;&lt; endl;
+    
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>该程序声明了信号类型为 SIGINT 的signal函数，用于捕获 SIGINT信号。SIGINT信号代表由InterruptKey产生，通常是CTRL +C<br>当什么都不做时，程序会正常运行到结束。<br>如果在程序结束前按下CTRL +C ，函数捕获SIGINT信号，进入signalHandler函数，mian函数阻塞，直至signalHandler函数运行结束，mian函数打印后程序结束。</p>
+<h2 id="3-函数raise"><a href="#3-函数raise" class="headerlink" title="3.函数raise"></a>3.函数raise</h2><p>函数raise 产生一个信号sig，并向当前正在执行的程序发送信号sig，其声明如下：</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">int raise (int sig);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重点： 值得注意的是，raise发出的信号，可被当前进程中同类型型号的signal函数捕获。</p>
+<pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">#include &lt;chrono&gt;
+#include &lt;iostream&gt;
+#include &lt;csignal&gt;
+#include &lt;thread&gt;
+
+using namespace std;
+void signalHandler( int signum ) {
+    std::cout &lt;&lt; "我来处理！" &lt;&lt; std::endl;
+    std::this_thread::sleep_for(std::chrono::seconds(2));
+    
+    raise(SIGQUIT);                     // 3. 退出程序
+}
+
+int main() {
+    
+    signal(SIGINT, signalHandler);      // 1. signal函数，用于捕获 SIGINT 信号
+    int i=0;
+
+    while(++i){
+        std::cout &lt;&lt; "keep run...." &lt;&lt; i &lt;&lt; std::endl;
+        if( i == 3 )
+            raise(SIGINT);              // 2. raise, 发送SIGINT 信号
+    }
+    
+    return 0;
+}<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>可以看出当signal捕获信号后，main函数对应的程序暂停，不再打印。<br>本测试中signalHandler()发出 SIGQUIT信号，进程结束。</p>
+<hr>
 <p>参考博客<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013271656/article/details/114537411">https://blog.csdn.net/u013271656/article/details/114537411</a></p>
+<p>链接测试<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013271">https://blog.csdn.net/u013271</a></p>
 
                 
             </div>
