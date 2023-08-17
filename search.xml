@@ -383,7 +383,7 @@ def test():
 <h2 id="2-函数signal"><a href="#2-函数signal" class="headerlink" title="2.函数signal"></a>2.函数signal</h2><p>函数signal 用于捕获信号，可指定信号处理的方式，函数声明如下：</p>
 <pre class="line-numbers language-C++" data-language="C++"><code class="language-C++">void (*signal(int sig, void (*func)(int)))(int);<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
 
-<div class="note "><p>第一个参数 sig 指明了所要处理的信号类型，它可以取除了SIGKILL和SIGSTOP外的任何一种信号。<br>第二个参数描述了与信号关联的动作，下面将会对这三个参数进行讲解。<br>(without define class style)</p>
+<div class="note "><p>第一个参数 sig 指明了所要处理的信号类型，它可以取除了SIGKILL和SIGSTOP外的任何一种信号。<br>第二个参数描述了与信号关联的动作，下面将会对这三个参数进行讲解。</p>
 </div>
 
 <p>当程序收到信号的进程对各种信号有不同的处理方法。处理方法可以分为三类：<br>    1. 默认处理：对信号进行该信号的系统默认处理，第二参数为 SIG_DFL。<br>    2. 忽略信号：忽略该信号，第二参数为 SIG_IGN。<br>    3. Function handler：指定处理函数，由该函数来处理，第二参数为 函数指针 。<br>若signal函数中第二参数（函数指针）中通过 raise发出与signal函数对应信号类型相同的信号。程序将在signal函数这成为死循环，自己发信号，自己捕获，进程暂停。</p>
@@ -484,7 +484,6 @@ int main() {
 <p>可以看出当signal捕获信号后，main函数对应的程序暂停，不再打印。<br>本测试中signalHandler()发出 SIGQUIT信号，进程结束。</p>
 <hr>
 <p>参考博客<a href="https://blog.csdn.net/u013271656/article/details/114537411">https://blog.csdn.net/u013271656/article/details/114537411</a></p>
-<p>链接测试<a href="https://blog.csdn.net/u013271">https://blog.csdn.net/u013271</a></p>
 ]]></content>
       <categories>
         <category>C++</category>
@@ -520,5 +519,29 @@ int main() {
         <tag>hexo</tag>
         <tag>web</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Cartographer源码阅读</title>
+    <url>/2023/08/09/Cartographer%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</url>
+    <content><![CDATA[<h4 id="（一）PoseGraph2D类"><a href="#（一）PoseGraph2D类" class="headerlink" title="（一）PoseGraph2D类"></a>（一）PoseGraph2D类</h4><h5 id="位姿图Node的插入"><a href="#位姿图Node的插入" class="headerlink" title="位姿图Node的插入"></a>位姿图Node的插入</h5><p>在<code>GlobalTrajectoryBuilder</code>类中调用<code>AddSensorData()</code>接口更新激光点云数据时，会调用<code>PoseGraph2D</code>类的<code>AddNode()</code>接口。<br><code>AddNode()</code>函数中会调用<code>AppendNode()</code>函数，然后调用<code>ComputeConstraintsForNode()</code>函数计算约束。</p>
+<h5 id="约束计算和回环检测"><a href="#约束计算和回环检测" class="headerlink" title="约束计算和回环检测"></a>约束计算和回环检测</h5><h5 id="工作流处理机制"><a href="#工作流处理机制" class="headerlink" title="工作流处理机制"></a>工作流处理机制</h5><p><code>AddWorkItem()</code></p>
+<p><code>HandleWorkQueue()</code></p>
+<p><code>DrainWorkQueue()</code></p>
+<h4 id="（二）MapBuilder类"><a href="#（二）MapBuilder类" class="headerlink" title="（二）MapBuilder类"></a>（二）MapBuilder类</h4><h5 id="删除submap机制"><a href="#删除submap机制" class="headerlink" title="删除submap机制"></a>删除submap机制</h5><p>共包含两种trim的机制，第一种是<code>OverlappingSubmapsTrimmer2D</code>类型的，只用在2D SLAM中；第二种是<code>PureLocalizationTrimmer</code>，在2D和3D中都可以用。<br>在<code>MapBuilder</code>类中调用<code>AddTrajectoryBuilder()</code>接口时，会调用<code>PoseGraph2D</code>类的<code>AddTrimmer()</code>接口，向pose_graph中配置<code>PoseGraphTrimmer</code>类。<br>在<code>PoseGraph2D</code>类调用<code>HandleWorkQueue()</code>函数处理工作流的过程中，会调用<code>Trim()</code>函数执行submap的筛选和删除操作。<br><code>MapBuilder</code>类中一般会向pose_graph中配置<code>PureLocalizationTrimmer</code>类，在纯定位的情况下会只保留3张submap，每次有新的submap进来的时候会删除最早的一张submap，具体实现细节在<code>PureLocalizationTrimmer::Trim()</code>函数中。<br><code>OverlappingSubmapsTrimmer2D</code>类</p>
+<h4 id="（三）LocalTrajectoryBuilder2D类"><a href="#（三）LocalTrajectoryBuilder2D类" class="headerlink" title="（三）LocalTrajectoryBuilder2D类"></a>（三）LocalTrajectoryBuilder2D类</h4><h5 id="管理外推器PoseExtrapolator"><a href="#管理外推器PoseExtrapolator" class="headerlink" title="管理外推器PoseExtrapolator"></a>管理外推器PoseExtrapolator</h5><p><code>InitializeExtrapolator()</code>函数：初始化<code>extrapolator_</code>指针，然后调用<code>PoseExtrapolator::AddPose()</code>函数添加初始位姿。<br><code>AddImuData()</code>函数：调用<code>PoseExtrapolator::AddImuData()</code>添加IMU数据,初次调用时会首先使用<code>InitializeExtrapolator()</code>函数初始化外推器.<br><code>AddOdometryData()</code>函数：调用<code>PoseExtrapolator::AddOdometryData()</code>添加轮式里程计数据。  </p>
+<h5 id="激光点云数据处理"><a href="#激光点云数据处理" class="headerlink" title="激光点云数据处理"></a>激光点云数据处理</h5><p>通过<code>AddRangeData()</code>接口传入激光点云数据，</p>
+<p>调用<code>AddAccumulatedRangeData()</code>函数</p>
+<p>在<code>AddAccumulatedRangeData()</code>函数中，调用<code>sensor::AdaptiveVoxelFilter()</code>函数对点云数据进行自适应体素滤波，然后调用<code>ScanMatch()</code>函数得到点云匹配位姿，然后调用<code>PoseExtrapolator::AddPose()</code>函数将匹配位姿添加到外推器，然后调用<code>InsertIntoSubmap()</code>函数将激光点云数据插入到submap</p>
+<h5 id="激光点云去畸变"><a href="#激光点云去畸变" class="headerlink" title="激光点云去畸变"></a>激光点云去畸变</h5><h5 id="ScanMatch帧间匹配"><a href="#ScanMatch帧间匹配" class="headerlink" title="ScanMatch帧间匹配"></a>ScanMatch帧间匹配</h5><h5 id="Submap的生成及数据插入"><a href="#Submap的生成及数据插入" class="headerlink" title="Submap的生成及数据插入"></a>Submap的生成及数据插入</h5><p>通过调用<code>InsertIntoSubmap()</code>函数将激光点云数据插入到submap中，其中首先要调用<code>MotionFilter</code>类的<code>IsSimilar()</code>函数控制插入的激光点云帧数稀疏化</p>
+<h4 id="（四）GlobalTrajectoryBuilder类"><a href="#（四）GlobalTrajectoryBuilder类" class="headerlink" title="（四）GlobalTrajectoryBuilder类"></a>（四）GlobalTrajectoryBuilder类</h4><h4 id="（五）PoseExtrapolator类，外推器"><a href="#（五）PoseExtrapolator类，外推器" class="headerlink" title="（五）PoseExtrapolator类，外推器"></a>（五）PoseExtrapolator类，外推器</h4><p>位姿外插器的主要作用是利用保存了一段时间的位姿计算角速度和线速度，并利用线速度和角速度进行位姿插值。</p>
+<p><code>AddPose()</code></p>
+<p><code>AddImuData()</code></p>
+<p><code>AddOdometryData()</code></p>
+<p><code>ExtrapolatePose()</code></p>
+<p><code>ExtrapolateTranslation()</code></p>
+<p><code>ExtrapolateRotation()</code></p>
+<p><code>AdvanceImuTracker()</code></p>
+<h4 id="（六）MotionFilter类，前端Node稀疏化"><a href="#（六）MotionFilter类，前端Node稀疏化" class="headerlink" title="（六）MotionFilter类，前端Node稀疏化"></a>（六）MotionFilter类，前端Node稀疏化</h4><p>在<code>trajectory_builder_2d.cc</code>的<code>LocalTrajectoryBuilder2D::AddAccumulatedRangeData()</code>函数中执行稀疏化任务，即在<code>AddAccumulatedRangeData()</code>函数中调用<code>InsertIntoSubmap()</code>函数，在<code>InsertIntoSubmap()</code>函数内调用<code>MotionFilter::IsSimilar()</code>函数进行稀疏化，如果被判断和上一帧的时间及位姿变化较小，则认为该帧不是Node，不放入后端。</p>
+]]></content>
   </entry>
 </search>

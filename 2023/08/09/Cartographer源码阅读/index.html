@@ -4,8 +4,8 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="contact, 孤岛">
-    <meta name="description" content="好好学习天天向上">
+    <meta name="keywords" content="Cartographer源码阅读, 孤岛">
+    <meta name="description" content="（一）PoseGraph2D类位姿图Node的插入在GlobalTrajectoryBuilder类中调用AddSensorData()接口更新激光点云数据时，会调用PoseGraph2D类的AddNode()接口。AddNode()函数中">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -17,7 +17,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>contact | 孤岛</title>
+    <title>Cartographer源码阅读 | 孤岛</title>
     <link rel="icon" type="image/png" href="/star-icon.png">
     
 
@@ -331,105 +331,418 @@
 
 </header>
 
-    <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<link rel="stylesheet" type="text/css" href="/css/barrager.css">
-<script src="/libs/valine/av-min.js"></script>
-<script src="/libs/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="/js/jquery.barrager.js"></script>
+    
 
-<div class="bg-cover pd-header about-cover">
-    <div class="container">
-    <div class="row">
-    <div class="col s10 offset-s1 m8 offset-m2 l8 offset-l2">
-        <div class="brand">
-            <div class="title center-align">
-                
-                Le vent se lève, il faut tenter de vivre
-                
-            </div>
 
-            <div class="description center-align">
-                
-                <span id="subtitle"></span>
-                <script src="/libs/typed/typed.js"></script>
-                <script>
-                    var typed = new Typed("#subtitle", {
-                        strings: [ 
-                            
-                                "从来没有真正的绝境, 只有心灵的迷途",
-                            
-                                "Never really desperate, only the lost of the soul",
-                            
-                        ],
-                        startDelay: 300,
-                        typeSpeed: 100,
-                        loop: true,
-                        backSpeed: 50,
-                        showCursor: true
-                    });
-                </script>
-                
+
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/5.jpg')">
+    <div class="container" style="right: 0px;left: 0px;">
+        <div class="row">
+            <div class="col s12 m12 l12">
+                <div class="brand">
+                    <h1 class="description center-align post-title">Cartographer源码阅读</h1>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 
-<script>
-    $('.bg-cover').css('background-image', 'url(/medias/banner/0.jpg)');
-</script>
 
 
+<main class="post-container content">
+
+    
+    <div class="row">
+    <div id="main-content" class="col s12 m12 l9">
+        <!-- 文章内容详情 -->
+<div id="artDetail">
+    <div class="card">
+        <div class="card-content article-info">
+            <div class="row tag-cate">
+                <div class="col s7">
+                    
+                          <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                          </div>
+                    
+                </div>
+                <div class="col s5 right-align">
+                    
+                </div>
+            </div>
+
+            <div class="post-info">
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
+                    2023-08-09
+                </div>
+                
+
+                
+                <div class="post-date info-break-policy">
+                    <i class="far fa-calendar-check fa-fw"></i>更新日期:&nbsp;&nbsp;
+                    2023-08-15
+                </div>
+                
+
+                
+
+                
+
+                
+                    <div id="busuanzi_container_page_pv" class="info-break-policy">
+                        <i class="far fa-eye fa-fw"></i>阅读次数:&nbsp;&nbsp;
+                        <span id="busuanzi_value_page_pv"></span>
+                    </div>
+				
+            </div>
+        </div>
+        <hr class="clearfix">
+
+        
+        <!-- 是否加载使用自带的 prismjs. -->
+        <link rel="stylesheet" href="/libs/prism/prism.min.css">
+        
+
+        
+
+        <div class="card-content article-card-content">
+            <div id="articleContent">
+                <h4 id="（一）PoseGraph2D类"><a href="#（一）PoseGraph2D类" class="headerlink" title="（一）PoseGraph2D类"></a>（一）PoseGraph2D类</h4><h5 id="位姿图Node的插入"><a href="#位姿图Node的插入" class="headerlink" title="位姿图Node的插入"></a>位姿图Node的插入</h5><p>在<code>GlobalTrajectoryBuilder</code>类中调用<code>AddSensorData()</code>接口更新激光点云数据时，会调用<code>PoseGraph2D</code>类的<code>AddNode()</code>接口。<br><code>AddNode()</code>函数中会调用<code>AppendNode()</code>函数，然后调用<code>ComputeConstraintsForNode()</code>函数计算约束。</p>
+<h5 id="约束计算和回环检测"><a href="#约束计算和回环检测" class="headerlink" title="约束计算和回环检测"></a>约束计算和回环检测</h5><h5 id="工作流处理机制"><a href="#工作流处理机制" class="headerlink" title="工作流处理机制"></a>工作流处理机制</h5><p><code>AddWorkItem()</code></p>
+<p><code>HandleWorkQueue()</code></p>
+<p><code>DrainWorkQueue()</code></p>
+<h4 id="（二）MapBuilder类"><a href="#（二）MapBuilder类" class="headerlink" title="（二）MapBuilder类"></a>（二）MapBuilder类</h4><h5 id="删除submap机制"><a href="#删除submap机制" class="headerlink" title="删除submap机制"></a>删除submap机制</h5><p>共包含两种trim的机制，第一种是<code>OverlappingSubmapsTrimmer2D</code>类型的，只用在2D SLAM中；第二种是<code>PureLocalizationTrimmer</code>，在2D和3D中都可以用。<br>在<code>MapBuilder</code>类中调用<code>AddTrajectoryBuilder()</code>接口时，会调用<code>PoseGraph2D</code>类的<code>AddTrimmer()</code>接口，向pose_graph中配置<code>PoseGraphTrimmer</code>类。<br>在<code>PoseGraph2D</code>类调用<code>HandleWorkQueue()</code>函数处理工作流的过程中，会调用<code>Trim()</code>函数执行submap的筛选和删除操作。<br><code>MapBuilder</code>类中一般会向pose_graph中配置<code>PureLocalizationTrimmer</code>类，在纯定位的情况下会只保留3张submap，每次有新的submap进来的时候会删除最早的一张submap，具体实现细节在<code>PureLocalizationTrimmer::Trim()</code>函数中。<br><code>OverlappingSubmapsTrimmer2D</code>类</p>
+<h4 id="（三）LocalTrajectoryBuilder2D类"><a href="#（三）LocalTrajectoryBuilder2D类" class="headerlink" title="（三）LocalTrajectoryBuilder2D类"></a>（三）LocalTrajectoryBuilder2D类</h4><h5 id="管理外推器PoseExtrapolator"><a href="#管理外推器PoseExtrapolator" class="headerlink" title="管理外推器PoseExtrapolator"></a>管理外推器PoseExtrapolator</h5><p><code>InitializeExtrapolator()</code>函数：初始化<code>extrapolator_</code>指针，然后调用<code>PoseExtrapolator::AddPose()</code>函数添加初始位姿。<br><code>AddImuData()</code>函数：调用<code>PoseExtrapolator::AddImuData()</code>添加IMU数据,初次调用时会首先使用<code>InitializeExtrapolator()</code>函数初始化外推器.<br><code>AddOdometryData()</code>函数：调用<code>PoseExtrapolator::AddOdometryData()</code>添加轮式里程计数据。  </p>
+<h5 id="激光点云数据处理"><a href="#激光点云数据处理" class="headerlink" title="激光点云数据处理"></a>激光点云数据处理</h5><p>通过<code>AddRangeData()</code>接口传入激光点云数据，</p>
+<p>调用<code>AddAccumulatedRangeData()</code>函数</p>
+<p>在<code>AddAccumulatedRangeData()</code>函数中，调用<code>sensor::AdaptiveVoxelFilter()</code>函数对点云数据进行自适应体素滤波，然后调用<code>ScanMatch()</code>函数得到点云匹配位姿，然后调用<code>PoseExtrapolator::AddPose()</code>函数将匹配位姿添加到外推器，然后调用<code>InsertIntoSubmap()</code>函数将激光点云数据插入到submap</p>
+<h5 id="激光点云去畸变"><a href="#激光点云去畸变" class="headerlink" title="激光点云去畸变"></a>激光点云去畸变</h5><h5 id="ScanMatch帧间匹配"><a href="#ScanMatch帧间匹配" class="headerlink" title="ScanMatch帧间匹配"></a>ScanMatch帧间匹配</h5><h5 id="Submap的生成及数据插入"><a href="#Submap的生成及数据插入" class="headerlink" title="Submap的生成及数据插入"></a>Submap的生成及数据插入</h5><p>通过调用<code>InsertIntoSubmap()</code>函数将激光点云数据插入到submap中，其中首先要调用<code>MotionFilter</code>类的<code>IsSimilar()</code>函数控制插入的激光点云帧数稀疏化</p>
+<h4 id="（四）GlobalTrajectoryBuilder类"><a href="#（四）GlobalTrajectoryBuilder类" class="headerlink" title="（四）GlobalTrajectoryBuilder类"></a>（四）GlobalTrajectoryBuilder类</h4><h4 id="（五）PoseExtrapolator类，外推器"><a href="#（五）PoseExtrapolator类，外推器" class="headerlink" title="（五）PoseExtrapolator类，外推器"></a>（五）PoseExtrapolator类，外推器</h4><p>位姿外插器的主要作用是利用保存了一段时间的位姿计算角速度和线速度，并利用线速度和角速度进行位姿插值。</p>
+<p><code>AddPose()</code></p>
+<p><code>AddImuData()</code></p>
+<p><code>AddOdometryData()</code></p>
+<p><code>ExtrapolatePose()</code></p>
+<p><code>ExtrapolateTranslation()</code></p>
+<p><code>ExtrapolateRotation()</code></p>
+<p><code>AdvanceImuTracker()</code></p>
+<h4 id="（六）MotionFilter类，前端Node稀疏化"><a href="#（六）MotionFilter类，前端Node稀疏化" class="headerlink" title="（六）MotionFilter类，前端Node稀疏化"></a>（六）MotionFilter类，前端Node稀疏化</h4><p>在<code>trajectory_builder_2d.cc</code>的<code>LocalTrajectoryBuilder2D::AddAccumulatedRangeData()</code>函数中执行稀疏化任务，即在<code>AddAccumulatedRangeData()</code>函数中调用<code>InsertIntoSubmap()</code>函数，在<code>InsertIntoSubmap()</code>函数内调用<code>MotionFilter::IsSimilar()</code>函数进行稀疏化，如果被判断和上一帧的时间及位姿变化较小，则认为该帧不是Node，不放入后端。</p>
+
+                
+            </div>
+            <hr/>
+
+            
+
+    <div class="reprint" id="reprint-statement">
+        
+            <div class="reprint__author">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-user">
+                        文章作者:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="/about" rel="external nofollow noreferrer">Johnathon Dean</a>
+                </span>
+            </div>
+            <div class="reprint__type">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-link">
+                        文章链接:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    <a href="https://JohnathonDean.github.io/2023/08/09/Cartographer%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">https://JohnathonDean.github.io/2023/08/09/Cartographer%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/</a>
+                </span>
+            </div>
+            <div class="reprint__notice">
+                <span class="reprint-meta" style="font-weight: bold;">
+                    <i class="fas fa-copyright">
+                        版权声明:
+                    </i>
+                </span>
+                <span class="reprint-info">
+                    本博客所有文章除特別声明外，均采用
+                    <a href="https://creativecommons.org/licenses/by/4.0/deed.zh" rel="external nofollow noreferrer" target="_blank">CC BY 4.0</a>
+                    许可协议。转载请注明来源
+                    <a href="/about" target="_blank">Johnathon Dean</a>
+                    !
+                </span>
+            </div>
+        
     </div>
+
+    <script async defer>
+      document.addEventListener("copy", function (e) {
+        let toastHTML = '<span>复制成功，请遵循本文的转载规则</span><button class="btn-flat toast-action" onclick="navToReprintStatement()" style="font-size: smaller">查看</a>';
+        M.toast({html: toastHTML})
+      });
+
+      function navToReprintStatement() {
+        $("html, body").animate({scrollTop: $("#reprint-statement").offset().top - 80}, 800);
+      }
+    </script>
+
+
+
+            <div class="tag_share" style="display: block;">
+                <div class="post-meta__tag-list" style="display: inline-block;">
+                    
+                        <div class="article-tag">
+                            <span class="chip bg-color">无标签</span>
+                        </div>
+                    
+                </div>
+                <div class="post_share" style="zoom: 80%; width: fit-content; display: inline-block; float: right; margin: -0.15rem 0;">
+                    <link rel="stylesheet" type="text/css" href="/libs/share/css/share.min.css">
+<div id="article-share">
+
+    
+    <div class="social-share" data-sites="twitter,facebook,google,qq,qzone,wechat,weibo,douban,linkedin" data-wechat-qrcode-helper="<p>微信扫一扫即可分享！</p>"></div>
+    <script src="/libs/share/js/social-share.min.js"></script>
+    
+
+    
+
 </div>
 
-<style>
-    #send{
-        margin-bottom: 10px;
-        width: 49%;
-        background-color: #0ba360;
-    }
-    #clear{
-        margin-bottom: 10px;
-        width: 49%;
-        background-color: #e7c65c;
-    }
-    p{
-        text-align: center;
-    }
-</style>
-<main class="content">
-    <div id="contact" class="container chip-container">
-        <div class="card">
-            <div class="card-content">
-                <div class="tag-title center-align">
-                    <i class="fas fa-comments"></i>&nbsp;&nbsp;留言板
+                </div>
+            </div>
+            
+        </div>
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+<article id="prenext-posts" class="prev-next articles">
+    <div class="row article-row">
+        
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
+            <div class="article-badge left-badge text-color">
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
+            <div class="card">
+                <a href="/2023/08/09/Cartographer%E6%BA%90%E7%A0%81%E9%98%85%E8%AF%BB/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="./load1.jpeg" data-original="/medias/featureimages/5.jpg" class="responsive-img" alt="Cartographer源码阅读">
+                        
+                        <span class="card-title">Cartographer源码阅读</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-08-09
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-user fa-fw"></i>
+                            Johnathon Dean
+                            
+                        </span>
+                    </div>
+                </div>
+
+                
+            </div>
+        </div>
+        
+        
+        <div class="article col s12 m6" data-aos="fade-up">
+            <div class="article-badge right-badge text-color">
+                下一篇&nbsp;<i class="fas fa-chevron-right"></i>
+            </div>
+            <div class="card">
+                <a href="/2023/02/07/hexo-startup/">
+                    <div class="card-image">
+                        
+                        
+                        <img src="./load1.jpeg" data-original="/medias/featureimages/12.jpg" class="responsive-img" alt="hexo-startup">
+                        
+                        <span class="card-title">hexo-startup</span>
+                    </div>
+                </a>
+                <div class="card-content article-content">
+                    <div class="summary block-with-text">
+                        
+                            
+                        
+                    </div>
+                    <div class="publish-info">
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2023-02-07
+                            </span>
+                        <span class="publish-author">
+                            
+                            <i class="fas fa-bookmark fa-fw icon-category"></i>
+                            
+                            <a href="/categories/hexo/" class="post-category">
+                                    hexo
+                                </a>
+                            
+                            
+                        </span>
+                    </div>
+                </div>
+                
+                <div class="card-action article-tags">
+                    
+                    <a href="/tags/hexo/">
+                        <span class="chip bg-color">hexo</span>
+                    </a>
+                    
+                    <a href="/tags/web/">
+                        <span class="chip bg-color">web</span>
+                    </a>
+                    
                 </div>
                 
             </div>
-            <!--valine评论弹幕-->
-            
         </div>
+        
+    </div>
+</article>
 
-        <!--其他评论card-->
-        <div class="card">
-            
+</div>
 
-            
 
-            
 
-            
+<!-- 代码块功能依赖 -->
+<script type="text/javascript" src="/libs/codeBlock/codeBlockFuction.js"></script>
 
-            
 
-            
+  <!-- 是否加载使用自带的 prismjs. -->
+  <script type="text/javascript" src="/libs/prism/prism.min.js"></script>
 
-            
 
+<!-- 代码语言 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeLang.js"></script>
+
+
+<!-- 代码块复制 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeCopy.js"></script>
+
+
+<!-- 代码块收缩 -->
+
+<script type="text/javascript" src="/libs/codeBlock/codeShrink.js"></script>
+
+
+
+    </div>
+    <div id="toc-aside" class="expanded col l3 hide-on-med-and-down">
+        <div class="toc-widget card" style="background-color: white;">
+            <div class="toc-title"><i class="far fa-list-alt"></i>&nbsp;&nbsp;目录</div>
+            <div id="toc-content"></div>
         </div>
     </div>
+</div>
+
+<!-- TOC 悬浮按钮. -->
+
+<div id="floating-toc-btn" class="hide-on-med-and-down">
+    <a class="btn-floating btn-large bg-color">
+        <i class="fas fa-list-ul"></i>
+    </a>
+</div>
+
+
+<script src="/libs/tocbot/tocbot.min.js"></script>
+<script>
+    $(function () {
+        tocbot.init({
+            tocSelector: '#toc-content',
+            contentSelector: '#articleContent',
+            headingsOffset: -($(window).height() * 0.4 - 45),
+            collapseDepth: Number('0'),
+            headingSelector: 'h2, h3, h4'
+        });
+
+        // Set scroll toc fixed.
+        let tocHeight = parseInt($(window).height() * 0.4 - 64);
+        let $tocWidget = $('.toc-widget');
+        $(window).scroll(function () {
+            let scroll = $(window).scrollTop();
+            /* add post toc fixed. */
+            if (scroll > tocHeight) {
+                $tocWidget.addClass('toc-fixed');
+            } else {
+                $tocWidget.removeClass('toc-fixed');
+            }
+        });
+
+        
+        /* 修复文章卡片 div 的宽度. */
+        let fixPostCardWidth = function (srcId, targetId) {
+            let srcDiv = $('#' + srcId);
+            if (srcDiv.length === 0) {
+                return;
+            }
+
+            let w = srcDiv.width();
+            if (w >= 450) {
+                w = w + 21;
+            } else if (w >= 350 && w < 450) {
+                w = w + 18;
+            } else if (w >= 300 && w < 350) {
+                w = w + 16;
+            } else {
+                w = w + 14;
+            }
+            $('#' + targetId).width(w);
+        };
+
+        // 切换TOC目录展开收缩的相关操作.
+        const expandedClass = 'expanded';
+        let $tocAside = $('#toc-aside');
+        let $mainContent = $('#main-content');
+        $('#floating-toc-btn .btn-floating').click(function () {
+            if ($tocAside.hasClass(expandedClass)) {
+                $tocAside.removeClass(expandedClass).hide();
+                $mainContent.removeClass('l9');
+            } else {
+                $tocAside.addClass(expandedClass).show();
+                $mainContent.addClass('l9');
+            }
+            fixPostCardWidth('artDetail', 'prenext-posts');
+        });
+        
+    });
+</script>
+
+    
+
 </main>
+
+
 
 
     <footer class="page-footer bg-color">
